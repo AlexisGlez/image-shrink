@@ -1,36 +1,13 @@
 import { app, BrowserWindow, Menu } from 'electron'
-import * as path from 'path'
-import * as url from 'url'
 
-import { isMacOS, isProd } from './utils'
+import { isMacOS } from './utils'
 import { createAppMenu } from './menu'
+import { MainWindow } from './windows/Main'
 
 let mainWindow: Electron.BrowserWindow | null
 
-function createWindow(): void {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({
-    height: 600,
-    width: isProd ? 500 : 800,
-    icon: `${__dirname}/public/icons/Icon_256x256.png`,
-    webPreferences: {
-      nodeIntegration: true,
-      devTools: !isProd,
-    },
-  })
-
-  if (!isProd) {
-    mainWindow.webContents.openDevTools()
-  }
-
-  // and load the index.html of the app.
-  mainWindow.loadURL(
-    url.format({
-      pathname: path.join(__dirname, './index.html'),
-      protocol: 'file:',
-      slashes: true,
-    }),
-  )
+function createMainWindow(): void {
+  mainWindow = new MainWindow()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
@@ -45,7 +22,7 @@ function createWindow(): void {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  createWindow()
+  createMainWindow()
 
   if (!mainWindow) {
     return
@@ -71,6 +48,6 @@ app.on('activate', () => {
   // On OS X it"s common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null || BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
+    createMainWindow()
   }
 })
