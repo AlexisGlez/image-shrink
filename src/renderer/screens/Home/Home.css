@@ -1,0 +1,17 @@
+.container {
+  margin-top: 70px;
+  padding: 0 20px;
+  width: 400px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.output {
+  margin-top: 40px;
+}
+
+#output-path {
+  font-weight: bold;
+}
