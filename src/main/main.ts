@@ -3,11 +3,13 @@ import { app, BrowserWindow, Menu } from 'electron'
 import { isMacOS } from './utils'
 import { createAppMenu } from './menu'
 import { MainWindow } from './windows/Main'
+import { registerShrinkImagePluginFor } from './plugins/shrinkImage'
 
 let mainWindow: Electron.BrowserWindow | null
 
 function createMainWindow(): void {
   mainWindow = new MainWindow()
+  registerShrinkImagePluginFor(mainWindow)
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
