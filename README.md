@@ -1,4 +1,4 @@
-# image-shrink
+# ImageShrink
 
 Desktop app to optimize images
 
@@ -14,10 +14,15 @@ The `npm run dev` command won't start your app and get your app shows on the scr
 npm start
 ```
 
-## Building the installer for your Electron app
+## Building the installer
 
-The boilerplate is currently configured to package & build the installer of
-your app for macOS & Windows using `electron-builder`.
+Execute the following command to start Webpack in production mode to generate an optimized build:
+
+```sh
+npm run dev
+```
+
+Package & build the installer of the app for macOS & Windows using:
 
 For macOS, execute:
 
@@ -29,27 +34,4 @@ For Windows, execute:
 
 ```sh
 npm run build:win
-```
-
-### Extra options
-
-The build scripts are pre-configured to build 64 bit installers since 64 bit
-should be the standard for a modern applications. 32 bit builds are still
-possible by changing the build scripts in `package.json` as below:
-
-```json
-// from
-"scripts": {
-    ...
-    "build:win": "electron-builder build --win --x64",
-    "build:mac": "electron-builder build --mac --x64"
-},
-
-// to
-"scripts": {
-    ...
-    "build:win": "electron-builder build --win --ia32",
-    // Works only on macOS version < 10.15
-    "build:mac": "electron-builder build --mac --ia32"
-},
 ```
