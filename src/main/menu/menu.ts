@@ -1,6 +1,9 @@
 import { isMacOS, isProd } from '../utils'
 
-export function createAppMenu(appName: string): Array<Electron.MenuItemConstructorOptions> {
+export function createAppMenu(
+  appName: string,
+  onAboutClick: () => void,
+): Array<Electron.MenuItemConstructorOptions> {
   const menu: Array<Electron.MenuItemConstructorOptions> = [
     {
       role: 'fileMenu',
@@ -13,6 +16,7 @@ export function createAppMenu(appName: string): Array<Electron.MenuItemConstruct
       submenu: [
         {
           label: 'About',
+          click: onAboutClick,
         },
       ],
     })
@@ -22,6 +26,7 @@ export function createAppMenu(appName: string): Array<Electron.MenuItemConstruct
       submenu: [
         {
           label: 'About',
+          click: onAboutClick,
         },
       ],
     })

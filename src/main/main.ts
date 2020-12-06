@@ -3,9 +3,11 @@ import { app, BrowserWindow, Menu } from 'electron'
 import { isMacOS } from './utils'
 import { createAppMenu } from './menu'
 import { MainWindow } from './windows/Main'
+import { AboutWindow } from './windows/About'
 import { registerShrinkImagePluginFor } from './plugins/shrinkImage'
 
 let mainWindow: Electron.BrowserWindow | null
+let aboutWindow: Electron.BrowserWindow | null
 
 function createMainWindow(): void {
   mainWindow = new MainWindow()
@@ -20,6 +22,10 @@ function createMainWindow(): void {
   })
 }
 
+function createAboutWindow() {
+  aboutWindow = new AboutWindow()
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -30,7 +36,7 @@ app.on('ready', () => {
     return
   }
 
-  const mainMenu = Menu.buildFromTemplate(createAppMenu(app.getName()))
+  const mainMenu = Menu.buildFromTemplate(createAppMenu(app.getName(), createAboutWindow))
 
   Menu.setApplicationMenu(mainMenu)
 

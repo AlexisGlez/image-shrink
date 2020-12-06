@@ -4,23 +4,21 @@ import * as url from 'url'
 
 import { isProd } from '@main/utils'
 
-export class MainWindow extends BrowserWindow {
+export class AboutWindow extends BrowserWindow {
   constructor() {
     super({
-      height: 600,
-      width: isProd ? 500 : 800,
+      title: 'About ImageShrink',
+      width: 300,
+      height: 300,
       icon: nativeImage.createFromPath(`${__dirname}/public/icons/Icon_256x256.png`),
+      resizable: false,
       backgroundColor: 'white',
-      webPreferences: {
-        nodeIntegration: true,
-        devTools: !isProd,
-      },
     })
 
-    // load the index.html of the app.
+    // load the about.html of the app.
     this.loadURL(
       url.format({
-        pathname: path.join(__dirname, './index.html'),
+        pathname: path.join(__dirname, './about.html'),
         protocol: 'file:',
         slashes: true,
       }),

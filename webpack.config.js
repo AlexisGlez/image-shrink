@@ -7,13 +7,12 @@ function srcPaths(src) {
   return path.join(__dirname, src)
 }
 
-const isEnvProduction = process.env.NODE_ENV === 'production'
-const isEnvDevelopment = process.env.NODE_ENV === 'development'
+const isProd = process.env.NODE_ENV === 'production'
 
 // #region Common settings
 const commonConfig = {
-  devtool: isEnvDevelopment ? 'source-map' : false,
-  mode: isEnvProduction ? 'production' : 'development',
+  devtool: !isProd ? 'source-map' : false,
+  mode: isProd ? 'production' : 'development',
   output: { path: srcPaths('dist') },
   node: { __dirname: false, __filename: false },
   resolve: {
@@ -78,8 +77,20 @@ rendererConfig.target = 'electron-renderer'
 rendererConfig.output.filename = 'renderer.bundle.js'
 rendererConfig.plugins = [
   new HtmlWebpackPlugin({
+    filename: 'index.html',
     template: path.resolve(__dirname, './public/index.html'),
   }),
 ]
 
-module.exports = [mainConfig, rendererConfig]
+const rendererAboutConfig = lodash.cloneDeep(commonConfig)
+rendererAboutConfig.entry = './src/renderer/rendererAbout.tsx'
+rendererAboutConfig.target = 'electron-renderer'
+rendererAboutConfig.output.filename = 'rendererAbout.bundle.js'
+rendererAboutConfig.plugins = [
+  new HtmlWebpackPlugin({
+    filename: 'about.html',
+    template: path.resolve(__dirname, './public/about.html'),
+  }),
+]
+
+module.exports = [mainConfig, rendererConfig, rendererAboutConfig]
