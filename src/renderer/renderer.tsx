@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 
 import { Home } from './screens/Home'
 
-import '@public/materialize.min'
+import '@public/materialize.min.js'
 
 import '@public/style.css'
 import '@public/all.min.css'

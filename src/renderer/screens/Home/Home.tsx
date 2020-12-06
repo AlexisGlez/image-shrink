@@ -1,6 +1,6 @@
-const path = require('path')
-const os = require('os')
-const { ipcRenderer } = require('electron')
+import * as path from 'path'
+import * as os from 'os'
+import { ipcRenderer } from 'electron'
 
 import * as React from 'react'
 
@@ -53,7 +53,7 @@ export const Home: React.FC<{}> = () => {
 
       <form id="image-form" onSubmit={onFormSubmit}>
         <div className="file-field input-field">
-          <div className="w-full">
+          <div className="btn w-full">
             <span>Browse</span>
             <input type="file" id="img" ref={imageField} />
           </div>
@@ -72,7 +72,7 @@ export const Home: React.FC<{}> = () => {
           <input type="range" min="0" max="100" id="slider" ref={sliderField} />
         </p>
 
-        <input type="submit" value="Resize" className="w-full black" />
+        <input type="submit" value="Resize" className="btn w-full black" />
       </form>
 
       <div className="card output">

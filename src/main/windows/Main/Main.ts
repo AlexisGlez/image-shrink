@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron'
+import { BrowserWindow, nativeImage } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
 
@@ -9,7 +9,7 @@ export class MainWindow extends BrowserWindow {
     super({
       height: 600,
       width: isProd ? 500 : 800,
-      icon: `${__dirname}/public/icons/Icon_256x256.png`,
+      icon: nativeImage.createFromPath(`${__dirname}/public/icons/Icon_256x256.png`),
       webPreferences: {
         nodeIntegration: true,
         devTools: !isProd,
