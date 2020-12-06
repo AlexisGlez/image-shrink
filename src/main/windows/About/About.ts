@@ -11,7 +11,7 @@ export class AboutWindow extends BrowserWindow {
       width: 300,
       height: 300,
       icon: nativeImage.createFromPath(`${__dirname}/public/icons/Icon_256x256.png`),
-      resizable: false,
+      resizable: !isProd,
       backgroundColor: 'white',
     })
 
