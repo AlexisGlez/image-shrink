@@ -5,6 +5,7 @@ export function createAppMenu(
   onAboutClick: () => void,
 ): Array<Electron.MenuItemConstructorOptions> {
   const menu: Array<Electron.MenuItemConstructorOptions> = [
+    ...((isMacOS ? [{ role: 'appMenu' }] : []) as Array<Electron.MenuItemConstructorOptions>),
     {
       role: 'fileMenu',
     },
